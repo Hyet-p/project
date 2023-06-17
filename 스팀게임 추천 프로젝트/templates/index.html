@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>스팀 게임 추천</title>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center my-4">스팀 게임 추천</h1>
+
+        <form method="POST">
+            <div class="row">
+                <div class="col">
+                    <h3>선호하는 게임 카테고리를 골라주세요.</h3>
+                    {% for category in categories %}
+                        <input type="checkbox" name="categories" value="{{ category }}">{{ category }}<br>
+                    {% endfor %}
+                </div>
+                
+                <div class="col">
+                    <h3>선호하는 게임 장르를 골라주세요.</h3>
+                    {% for genre in genres %}
+                        <input type="checkbox" name="genres" value="{{ genre }}">{{ genre }}<br>
+                    {% endfor %}
+                </div>
+
+                <div class="col">
+                    <h3>예산을 입력해주세요.<br>무료 게임만 추천: 0 입력</h3>
+                        <input type="number" name="price" min="0" required>
+                </div>
+            </div>
+
+            <div class="text-center my-4">
+                <input type="submit" value="추천 받기">
+            </div>
+        </form>
+
+        <h2 class="text-center my-4">추천 게임</h2>
+        {% if not recommendations.empty %}
+            <ul class="list-unstyled text-center">
+            {% for game in recommendations %}
+                <li>{{ game }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+
+</html>
